@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "paths": [
+    {
+      "id": "ai-assistant-builder-public",
+      "title": "Build a Tool-enabled AI Assistant",
+      "audience": "builder",
+      "goal": "Understand core architecture and safe tool-enabled assistant deployment.",
+      "estimated_hours": "6-10 hours",
+      "steps": [
+        "ai-assistant-stack",
+        "ai-models-providers",
+        "ai-agent-tool-calling",
+        "mcp-ecosystem",
+        "personal-infrastructure",
+        "cybersecurity-fundamentals"
+      ],
+      "outcome": "A scoped assistant design with read-only tools, deployment and security controls."
+    },
+    {
+      "id": "business-builder-public",
+      "title": "Validate and Prototype a Business",
+      "audience": "entrepreneur",
+      "goal": "Move from an idea to customer evidence and a small testable product.",
+      "estimated_hours": "4-8 hours plus field testing",
+      "steps": [
+        "business-validation",
+        "product-development"
+      ],
+      "outcome": "A customer/problem hypothesis, experiment, MVP scope and decision gate."
+    },
+    {
+      "id": "research-practitioner-public",
+      "title": "Evidence-based Research Workflow",
+      "audience": "researcher / analyst",
+      "goal": "Conduct repeatable research and communicate uncertainty.",
+      "estimated_hours": "3-6 hours",
+      "steps": [
+        "research-evidence-workflow"
+      ],
+      "outcome": "A question, search record, source assessment, synthesis and limitations."
+    }
+  ]
+}
