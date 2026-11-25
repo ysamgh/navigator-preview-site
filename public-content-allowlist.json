@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Explicit allowlist for public Navigator Preview. Only these reviewed map IDs may be copied into the static bundle.",
+  "maps": [
+    "ai-assistant-stack",
+    "ai-models-providers",
+    "mcp-ecosystem",
+    "ai-agent-tool-calling",
+    "personal-infrastructure",
+    "business-validation",
+    "product-development",
+    "research-evidence-workflow",
+    "cybersecurity-fundamentals"
+  ],
+  "excluded_by_default": [
+    "self-hosted-ai-assistant",
+    "automation-ecosystem",
+    "food-manufacturing-system",
+    "knowledge-management",
+    "software-delivery-devops",
+    "economics-decision-making"
+  ]
+}
