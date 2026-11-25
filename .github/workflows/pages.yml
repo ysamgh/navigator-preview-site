@@ -1,0 +1,50 @@
+name: Deploy Navigator Preview
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Validate public bundle
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          allow=json.loads(Path('public-content-allowlist.json').read_text())
+          catalog=json.loads(Path('maps-index.json').read_text())
+          expected=set(allow['maps'])
+          actual={m['id'] for m in catalog['maps']}
+          assert actual == expected, f'Catalog mismatch: {actual ^ expected}'
+          for m in catalog['maps']:
+              assert set(m.get('prerequisites', [])) <= expected
+              assert set(m.get('related_maps', [])) <= expected
+              assert Path(m['path']).is_file(), m['path']
+          paths=json.loads(Path('learning-paths.json').read_text())
+          for p in paths['paths']:
+              assert set(p['steps']) <= expected
+          print(f'Validated {len(actual)} allowlisted maps')
+          PY
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
