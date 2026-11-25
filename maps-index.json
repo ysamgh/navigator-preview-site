@@ -1,0 +1,504 @@
+{
+  "schema_version": "1.0",
+  "generated": "2026-11-24",
+  "maps": [
+    {
+      "id": "ai-assistant-stack",
+      "title": "AI Assistant Stack",
+      "path": "maps/ai-assistant-stack.md",
+      "domain": "ai-software",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "ai",
+        "architecture",
+        "llm",
+        "agent"
+      ],
+      "prerequisites": [],
+      "related_maps": [
+        "ai-models-providers",
+        "mcp-ecosystem",
+        "ai-agent-tool-calling"
+      ],
+      "summary": "Architecture and decision map for building an operable AI assistant with identity, context, orchestration, tools, deterministic policy gates, human approvals, state, reliability, observability, evaluation and staged MVP rollout.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "Building agents",
+          "url": "https://developers.openai.com/tracks/building-agents",
+          "type": "official-developer-guide",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Agent core components, tools, orchestration, guardrails and evaluation. Framework guidance, not universal requirements."
+        },
+        {
+          "title": "Agents Guide",
+          "url": "https://developers.openai.com/api/docs/guides/agents",
+          "type": "official-developer-docs",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Runtime choices and multi-step agent workflows."
+        },
+        {
+          "title": "Guardrails and human review",
+          "url": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals",
+          "type": "official-developer-docs",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Automatic validation and approval boundaries for consequential actions."
+        },
+        {
+          "title": "Integrations and observability",
+          "url": "https://developers.openai.com/api/docs/guides/agents/integrations-observability",
+          "type": "official-developer-docs",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Tracing and structured records of model, tool, handoff, guardrail and custom events."
+        },
+        {
+          "title": "Tool use with Claude",
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+          "type": "official-developer-docs",
+          "publisher": "Anthropic",
+          "accessed": "2026-11-24",
+          "notes": "Tool schema and execution distinction between client and server tools."
+        }
+      ],
+      "review_interval_days": 180
+    },
+    {
+      "id": "ai-models-providers",
+      "title": "AI Models & Providers",
+      "path": "maps/ai-models-providers.md",
+      "domain": "ai-software",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "models",
+        "providers",
+        "benchmark",
+        "routing"
+      ],
+      "prerequisites": [
+        "ai-assistant-stack"
+      ],
+      "related_maps": [
+        "ai-agent-tool-calling"
+      ],
+      "summary": "Decision framework for model/provider selection, task-specific evaluations, cost per accepted task, privacy, routing, fallback, lock-in, and change monitoring.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "OpenAI Models catalog",
+          "url": "https://developers.openai.com/api/docs/models",
+          "type": "official-documentation",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Model identities and capability/specification catalog; model-specific details and availability must be checked at deployment."
+        },
+        {
+          "title": "OpenAI Model selection guide",
+          "url": "https://developers.openai.com/api/docs/guides/model-selection",
+          "type": "official-developer-guide",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Task fit, reasoning settings, experimentation, and cost/quality tradeoffs; provider recommendations are not independent benchmarks."
+        },
+        {
+          "title": "OpenAI API changelog",
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "type": "official-changelog",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Model/API releases, migrations and deprecations."
+        },
+        {
+          "title": "Gemini API pricing",
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "type": "official-pricing",
+          "publisher": "Google",
+          "accessed": "2026-11-24",
+          "notes": "Official pricing, quotas, tier-specific data use and model/tool charges; pricing is volatile."
+        }
+      ],
+      "review_interval_days": 90
+    },
+    {
+      "id": "mcp-ecosystem",
+      "title": "MCP Ecosystem",
+      "path": "maps/mcp-ecosystem.md",
+      "domain": "ai-software",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "mcp",
+        "connectors",
+        "tools",
+        "permissions"
+      ],
+      "prerequisites": [
+        "ai-assistant-stack"
+      ],
+      "related_maps": [
+        "ai-agent-tool-calling",
+        "cybersecurity-fundamentals"
+      ],
+      "summary": "Source-audited overview of MCP roles, capabilities, transports, version changes, security boundaries, and integration selection.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "MCP Specification (2026-07-28)",
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28",
+          "type": "official-specification",
+          "publisher": "Model Context Protocol",
+          "accessed": "2026-11-24",
+          "notes": "Authoritative protocol overview, capabilities, security principles and optional extensions."
+        },
+        {
+          "title": "The 2026-07-28 Specification release announcement",
+          "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+          "type": "official-release-notes",
+          "publisher": "Model Context Protocol",
+          "accessed": "2026-11-24",
+          "notes": "Describes stateless core, routing, caching, authorization changes and deprecations."
+        },
+        {
+          "title": "MCP Specification Changelog",
+          "url": "https://modelcontextprotocol.io/specification/draft/changelog",
+          "type": "official-changelog",
+          "publisher": "Model Context Protocol",
+          "accessed": "2026-11-24",
+          "notes": "Tracks changes after the release; draft endpoint is rolling and can change."
+        }
+      ],
+      "review_interval_days": 180
+    },
+    {
+      "id": "ai-agent-tool-calling",
+      "title": "AI Agent & Tool-Calling Architecture",
+      "path": "maps/ai-agent-tool-calling.md",
+      "domain": "ai-software",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "agents",
+        "tool-calling",
+        "orchestration",
+        "policy"
+      ],
+      "prerequisites": [
+        "ai-assistant-stack"
+      ],
+      "related_maps": [
+        "mcp-ecosystem",
+        "cybersecurity-fundamentals"
+      ],
+      "summary": "Architecture for agent orchestration, tool contracts, policy gates, execution, state, observability, failure handling, and bounded autonomy.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "Function calling guide",
+          "url": "https://developers.openai.com/api/docs/guides/function-calling",
+          "type": "official-developer-docs",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Tool/function calling mechanics, schemas, and model-to-application interaction."
+        },
+        {
+          "title": "Agents SDK overview",
+          "url": "https://developers.openai.com/api/docs/guides/agents",
+          "type": "official-developer-docs",
+          "publisher": "OpenAI",
+          "accessed": "2026-11-24",
+          "notes": "Agent orchestration and framework overview; framework-specific features should be checked before implementation."
+        },
+        {
+          "title": "MCP Specification (2026-07-28)",
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28",
+          "type": "official-specification",
+          "publisher": "Model Context Protocol",
+          "accessed": "2026-11-24",
+          "notes": "User consent, data privacy, tool safety and client/server capability concepts."
+        }
+      ],
+      "review_interval_days": 180
+    },
+    {
+      "id": "personal-infrastructure",
+      "title": "Personal Infrastructure",
+      "path": "maps/personal-infrastructure.md",
+      "domain": "infrastructure",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "linux",
+        "vps",
+        "docker",
+        "networking",
+        "backup"
+      ],
+      "prerequisites": [],
+      "related_maps": [
+        "cybersecurity-fundamentals"
+      ],
+      "summary": "Practical architecture and operating checklist for personal/project infrastructure: Linux, networking, containers, domains, security, monitoring, backup and recovery.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "Debian Reference",
+          "url": "https://www.debian.org/doc/manuals/debian-reference/",
+          "type": "official-documentation",
+          "publisher": "Debian Project",
+          "published": "2026-10-10",
+          "accessed": "2026-11-24",
+          "notes": "Broad system administration reference; package management, security, data and backup/recovery topics."
+        },
+        {
+          "title": "Debian Administrator's Handbook",
+          "url": "https://www.debian.org/doc/manuals/debian-handbook/",
+          "type": "official-documentation",
+          "publisher": "Debian Project",
+          "accessed": "2026-11-24",
+          "notes": "System administration and services including SSH, permissions, logs, networking, and backup."
+        },
+        {
+          "title": "Install Docker Engine on Debian",
+          "url": "https://docs.docker.com/engine/install/debian/",
+          "type": "official-documentation",
+          "publisher": "Docker",
+          "accessed": "2026-11-24",
+          "notes": "Official Docker Engine installation; includes OS prerequisites and firewall implications for published ports."
+        },
+        {
+          "title": "Install Docker Compose plugin",
+          "url": "https://docs.docker.com/compose/install/linux/",
+          "type": "official-documentation",
+          "publisher": "Docker",
+          "accessed": "2026-11-24",
+          "notes": "Official Compose plugin installation and version verification."
+        }
+      ],
+      "review_interval_days": 180
+    },
+    {
+      "id": "business-validation",
+      "title": "Business Validation",
+      "path": "maps/business-validation.md",
+      "domain": "business-product",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "business",
+        "market",
+        "validation",
+        "customer"
+      ],
+      "prerequisites": [],
+      "related_maps": [
+        "product-development"
+      ],
+      "summary": "Evidence-driven process to test customer problems, demand, offers, experiments, unit economics, operational feasibility, and stop/pivot/scale decisions.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "Market research and competitive analysis",
+          "url": "https://www.sba.gov/counseling/plan-your-business/market-research-and-competitive-analysis",
+          "type": "official-guide",
+          "publisher": "U.S. Small Business Administration",
+          "accessed": "2026-11-24",
+          "notes": "Demand, market size, location, saturation, pricing, direct research and competitor assessment."
+        },
+        {
+          "title": "Plan your business",
+          "url": "https://www.sba.gov/counseling/plan-your-business/",
+          "type": "official-guide",
+          "publisher": "U.S. Small Business Administration",
+          "accessed": "2026-11-24",
+          "notes": "Business plan and Lean startup plan components, value proposition, segments, channels, revenue, cost structure."
+        },
+        {
+          "title": "10 steps to start your business",
+          "url": "https://www.sba.gov/business-guide/10-steps-start-your-business",
+          "type": "official-guide",
+          "publisher": "U.S. Small Business Administration",
+          "accessed": "2026-11-24",
+          "notes": "Market research, business planning, and startup sequence."
+        }
+      ],
+      "review_interval_days": 180
+    },
+    {
+      "id": "product-development",
+      "title": "Product Development",
+      "path": "maps/product-development.md",
+      "domain": "business-product",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "product",
+        "mvp",
+        "discovery",
+        "experiments"
+      ],
+      "prerequisites": [
+        "business-validation"
+      ],
+      "related_maps": [],
+      "summary": "Product lifecycle map from problem framing and discovery through assumption prioritization, alpha prototypes, MVP experiments, metrics, feasibility, controlled launch, live operations and scale gates.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "User research in discovery",
+          "url": "https://www.gov.uk/service-manual/user-research/user-research-in-discovery",
+          "type": "official-service-guidance",
+          "publisher": "GOV.UK",
+          "accessed": "2026-11-24",
+          "notes": "Discovery research aims to identify users, goals, current methods, frustrations and needs before solution design/build."
+        },
+        {
+          "title": "User research introduction",
+          "url": "https://www.gov.uk/service-manual/user-research/how-user-research-improves-service-design",
+          "type": "official-service-guidance",
+          "publisher": "GOV.UK",
+          "accessed": "2026-11-24",
+          "notes": "Continuous user research, outcome-focused behavior, iterative small research cycles; latest update listed 2026-11-17."
+        },
+        {
+          "title": "Learning about user needs",
+          "url": "https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs",
+          "type": "official-service-guidance",
+          "publisher": "GOV.UK",
+          "accessed": "2026-11-24",
+          "notes": "User needs across discovery, alpha, beta and live; research and observation methods."
+        },
+        {
+          "title": "How the discovery phase works",
+          "url": "https://www.gov.uk/service-manual/agile-delivery/how-the-discovery-phase-works",
+          "type": "official-service-guidance",
+          "publisher": "GOV.UK",
+          "accessed": "2026-11-24",
+          "notes": "Problem framing, user context, constraints and opportunities before committing to build."
+        },
+        {
+          "title": "Making prototypes",
+          "url": "https://www.gov.uk/service-manual/design/making-prototypes",
+          "type": "official-service-guidance",
+          "publisher": "GOV.UK",
+          "accessed": "2026-11-24",
+          "notes": "Prototype approaches to explore and test before committing to production implementation."
+        },
+        {
+          "title": "Government Design Principles",
+          "url": "https://www.gov.uk/guidance/government-design-principles",
+          "type": "official-design-guidance",
+          "publisher": "GOV.UK",
+          "accessed": "2026-11-24",
+          "notes": "User needs, data, iteration, inclusion and service outcomes. Guidance context, not universal product doctrine."
+        }
+      ],
+      "review_interval_days": 180
+    },
+    {
+      "id": "research-evidence-workflow",
+      "title": "Research & Evidence Workflow",
+      "path": "maps/research-evidence-workflow.md",
+      "domain": "knowledge-research",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "research",
+        "evidence",
+        "sources",
+        "synthesis"
+      ],
+      "prerequisites": [],
+      "related_maps": [
+        "ai-models-providers"
+      ],
+      "summary": "Practical evidence workflow from question framing and search planning through source appraisal, claim-level provenance, synthesis, uncertainty, decision translation, and reproducibility.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "Cochrane Handbook for Systematic Reviews of Interventions",
+          "url": "https://www.cochrane.org/handbook",
+          "type": "methodological-handbook",
+          "publisher": "Cochrane",
+          "accessed": "2026-11-24",
+          "notes": "Health-intervention systematic review methods including question framing, searching, selection, data extraction, risk of bias, synthesis, and interpretation; domain-specific guidance."
+        },
+        {
+          "title": "Reproducibility and Replicability in Science",
+          "url": "https://nap.nationalacademies.org/25303",
+          "type": "consensus-study-report",
+          "publisher": "National Academies of Sciences, Engineering, and Medicine",
+          "published": "2019",
+          "accessed": "2026-11-24",
+          "notes": "Research rigor, transparency, reproducibility and replicability considerations."
+        }
+      ],
+      "review_interval_days": 180
+    },
+    {
+      "id": "cybersecurity-fundamentals",
+      "title": "Cybersecurity Fundamentals",
+      "path": "maps/cybersecurity-fundamentals.md",
+      "domain": "security",
+      "status": "draft",
+      "updated": "2026-11-24",
+      "tags": [
+        "security",
+        "threat-model",
+        "secrets",
+        "incident-response"
+      ],
+      "prerequisites": [
+        "personal-infrastructure"
+      ],
+      "related_maps": [
+        "mcp-ecosystem",
+        "ai-agent-tool-calling"
+      ],
+      "summary": "Practical security baseline using NIST CSF 2.0: governance, asset inventory, layered controls, incident response, backups, and review triggers.",
+      "confidence": "likely",
+      "sources": [
+        {
+          "title": "NIST Cybersecurity Framework 2.0",
+          "url": "https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final",
+          "type": "official-framework",
+          "publisher": "NIST",
+          "published": "2024-02-26",
+          "accessed": "2026-11-24",
+          "notes": "Framework structure, six functions, risk outcomes, and flexible application."
+        },
+        {
+          "title": "NIST CSF 2.0 Small Business Quick-Start Guide (SP 1300)",
+          "url": "https://csrc.nist.gov/pubs/sp/1300/final",
+          "type": "official-guide",
+          "publisher": "NIST",
+          "published": "2024-02-26",
+          "accessed": "2026-11-24",
+          "notes": "Starting guidance for small businesses with modest or no cybersecurity plans."
+        },
+        {
+          "title": "Small Business Cybersecurity: Non-Employer Firms (CSWP 50)",
+          "url": "https://csrc.nist.gov/pubs/cswp/50/small-business-cybersecurity-non-employer-firms/final",
+          "type": "official-guide",
+          "publisher": "NIST",
+          "published": "2026-11-02",
+          "accessed": "2026-11-24",
+          "notes": "Tailored cybersecurity program guidance for owner-only firms and small businesses with minimal IT infrastructure."
+        },
+        {
+          "title": "NIST CSF 2.0 FAQ",
+          "url": "https://www.nist.gov/cyberframework/faqs",
+          "type": "official-faq",
+          "publisher": "NIST",
+          "accessed": "2026-11-24",
+          "notes": "Clarifies CSF outcomes are flexible and not a prescriptive universal checklist."
+        }
+      ],
+      "review_interval_days": 180
+    }
+  ]
+}
